@@ -1,0 +1,56 @@
+    <button id="sort_numbers_down">Числа по убыванию</button> 
+    <button id="sort_numbers_up">Числа по возрастанию</button>
+    <button id="sort_string_down">Строки по убыванию</button>
+    <button id="sort_string_up">Строки по возрастанию</button>
+	
+	<div class="" id="parantblock"> //родительский блок 
+		<div  data-numbers="1" data-string="a">numbers = 1 , string= a </div> //дочерний блок 
+		<div  data-numbers="2" data-string="v">numbers = 2 , string= v </div> 
+		<div  data-numbers="5" data-string="c">numbers = 5 , string= c </div>  
+		<div  data-numbers="4" data-string="h">numbers = 4 , string= h </div> 
+		<div  data-numbers="3" data-string="c">numbers = 3 , string= c </div> 
+		<div  data-numbers="6" data-string="j">numbers = 6 , string= j </div> 
+	</div>
+
+<script> // функции клика по кнопке, передача нужной data-
+document.querySelector('#sort_numbers_up').onclick = function () {
+    sort_numbers_up('data-numbers');
+}
+document.querySelector('#sort_numbers_down').onclick = function () {
+    sort_numbers_down('data-numbers');
+}
+document.querySelector('#sort_string_up').onclick = function () {
+    sort_up('data-string');
+}
+document.querySelector('#sort_string_down').onclick = function () {
+    sort_down('data-string');
+}
+
+function sort_string_up(sortType) {
+        let parantblock = document.querySelector('#parantblock');   //родительский блок 
+       for (let i = 0; i < parantblock.children.length; i++) { // цикл сортировки 
+    for (let j = i; j < parantblock.children.length; j++) { // цикл сортировки 
+      if (parantblock.children[i].getAttribute(sortType) > parantblock.children[j].getAttribute(sortType)) { // сравнение элементов
+          replacedNode = parantblock.replaceChild(parantblock.children[j],parantblock.children[i]); //замена элементов
+          insertAfter(replacedNode, parantblock.children[i]); //замена элементов
+      }
+    }
+  }
+};
+
+function sort_string_down(sortType) {
+ let parantblock = document.querySelector('#parantblock');  //родительский блок 
+       for (let i = 0; i < parantblock.children.length; i++) { // цикл сортировки 
+    for (let j = i; j < parantblock.children.length; j++) { // цикл сортировки 
+      if (parantblock.children[i].getAttribute(sortType) < parantblock.children[j].getAttribute(sortType)) { // сравнение элементов
+          replacedNode = parantblock.replaceChild(parantblock.children[j],parantblock.children[i]); //замена элементов
+          insertAfter(replacedNode, parantblock.children[i]); //замена элементов
+      }
+    }
+  }
+};
+
+function insertAfter(elem, refElem){  // функция замены элементов
+    return refElem.parentNode.insertBefore(elem, refElem.nextSibling); //замена элементов
+}
+</script>
